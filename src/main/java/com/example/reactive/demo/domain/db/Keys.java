@@ -5,8 +5,10 @@ package com.example.reactive.demo.domain.db;
 
 
 import com.example.reactive.demo.domain.db.tables.FlywaySchemaHistory;
+import com.example.reactive.demo.domain.db.tables.Person;
 import com.example.reactive.demo.domain.db.tables.TestEntity;
 import com.example.reactive.demo.domain.db.tables.records.FlywaySchemaHistoryRecord;
+import com.example.reactive.demo.domain.db.tables.records.PersonRecord;
 import com.example.reactive.demo.domain.db.tables.records.TestEntityRecord;
 
 import org.jooq.TableField;
@@ -27,5 +29,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
+    public static final UniqueKey<PersonRecord> PERSON_PKEY = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pkey"), new TableField[] { Person.PERSON.ID }, true);
     public static final UniqueKey<TestEntityRecord> TEST_ENTITY_PKEY = Internal.createUniqueKey(TestEntity.TEST_ENTITY, DSL.name("test_entity_pkey"), new TableField[] { TestEntity.TEST_ENTITY.ID }, true);
 }

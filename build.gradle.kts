@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.data:spring-data-r2dbc:1.5.5")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("io.r2dbc:r2dbc-pool")

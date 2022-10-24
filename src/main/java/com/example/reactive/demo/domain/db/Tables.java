@@ -5,6 +5,7 @@ package com.example.reactive.demo.domain.db;
 
 
 import com.example.reactive.demo.domain.db.tables.FlywaySchemaHistory;
+import com.example.reactive.demo.domain.db.tables.Person;
 import com.example.reactive.demo.domain.db.tables.TestEntity;
 
 
@@ -18,6 +19,11 @@ public class Tables {
      * The table <code>public.flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
+     * The table <code>public.person</code>.
+     */
+    public static final Person PERSON = Person.PERSON;
 
     /**
      * The table <code>public.test_entity</code>.
