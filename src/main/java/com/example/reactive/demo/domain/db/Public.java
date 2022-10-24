@@ -5,6 +5,7 @@ package com.example.reactive.demo.domain.db;
 
 
 import com.example.reactive.demo.domain.db.tables.FlywaySchemaHistory;
+import com.example.reactive.demo.domain.db.tables.Person;
 import com.example.reactive.demo.domain.db.tables.TestEntity;
 
 import java.util.Arrays;
@@ -34,6 +35,11 @@ public class Public extends SchemaImpl {
     public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
+     * The table <code>public.person</code>.
+     */
+    public final Person PERSON = Person.PERSON;
+
+    /**
      * The table <code>public.test_entity</code>.
      */
     public final TestEntity TEST_ENTITY = TestEntity.TEST_ENTITY;
@@ -55,6 +61,7 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
+            Person.PERSON,
             TestEntity.TEST_ENTITY
         );
     }

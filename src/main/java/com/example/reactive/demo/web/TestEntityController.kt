@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/testEntity")
 class TestEntityController @Autowired constructor(
     private val testEntityRepository: TestEntityRepository,
 ) {
@@ -27,7 +29,7 @@ class TestEntityController @Autowired constructor(
         testEntityRepository.getAll()
     }
 
-    @GetMapping("/single/{id}")
+    @GetMapping("/{id}")
     suspend fun get(@PathVariable("id") id: Long): TestEntity? = coroutineScope {
         testEntityRepository.get(id)
     }
