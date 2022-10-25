@@ -1,5 +1,6 @@
 package com.example.reactive.demo.domain.repository
 
+import com.example.reactive.demo.domain.transaction.TransactionContext
 import com.example.reactive.demo.domain.db.Tables.TEST_ENTITY
 import com.example.reactive.demo.domain.db.tables.records.TestEntityRecord
 import com.example.reactive.demo.domain.model.TestEntity
@@ -9,26 +10,36 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrNull
 import kotlinx.coroutines.reactive.awaitSingle
-import org.jooq.DSLContext
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.toMono
 
 @Repository
-class TestEntityRepository @Autowired constructor(
-    private val dslContext: DSLContext,
-) {
+class TestEntityRepository {
 
-    suspend fun create(entity: TestEntityCreateRq): Long =
+    context(TransactionContext)
+    suspend fun createCoroutine(entity: TestEntityCreateRq): Long =
         dslContext.insertInto(TEST_ENTITY)
             .set(modelToRecord(entity))
             .returning(TEST_ENTITY.ID)
-            .awaitSingle().id
+            .awaitSingle().id.also {
+                println("key = ${entity.key}")
+            }
 
-    fun getAll(): Flow<TestEntity> =
+    context(TransactionContext)
+    fun createReactor(entity: TestEntityCreateRq): Mono<Long> =
+        dslContext.insertInto(TEST_ENTITY)
+            .set(modelToRecord(entity))
+            .returning(TEST_ENTITY.ID)
+            .toMono().map { it.id }
+
+    context(TransactionContext)
+    suspend fun getAll(): Flow<TestEntity> =
         dslContext.selectFrom(TEST_ENTITY)
             .asFlow()
             .map(::recordToModel)
 
+    context(TransactionContext)
     suspend fun get(id: Long): TestEntity? =
         dslContext.selectFrom(TEST_ENTITY)
             .where(TEST_ENTITY.ID.eq(id))

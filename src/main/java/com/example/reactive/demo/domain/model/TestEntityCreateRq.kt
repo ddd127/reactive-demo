@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TestEntityCreateRq(
     val key: String,
-    val value: String?,
+    val value: String? = null,
 )

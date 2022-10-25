@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.data:spring-data-r2dbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("io.r2dbc:r2dbc-pool")
@@ -51,7 +52,7 @@ buildscript {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
+        freeCompilerArgs = listOf("-Xjsr305=strict", "-Xcontext-receivers")
         jvmTarget = "17"
     }
 }
